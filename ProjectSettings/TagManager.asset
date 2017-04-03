@@ -19,6 +19,7 @@ TagManager:
   - TrumpPawn
   - square
   - Piece
+  - GameOver
   layers:
   - Default
   - TransparentFX

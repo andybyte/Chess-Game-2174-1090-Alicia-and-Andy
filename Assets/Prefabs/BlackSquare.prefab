@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65000799935771840}
   - component: {fileID: 23223972090703112}
   - component: {fileID: 114836033474287712}
+  - component: {fileID: 114437120889382028}
   m_Layer: 8
   m_Name: BlackSquare
   m_TagString: square
@@ -93,6 +94,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114437120889382028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1469814257922074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 32
+    i1: 94
+    i2: 32
+    i3: 101
+    i4: 108
+    i5: 139
+    i6: 231
+    i7: 244
+    i8: 57
+    i9: 1
+    i10: 5
+    i11: 199
+    i12: 57
+    i13: 160
+    i14: 97
+    i15: 161
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114836033474287712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,3 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squareID: 
+  occupant: {fileID: 0}
+  active: {fileID: 2100000, guid: da5c680f2758a4b4e81a597bcb3f8ada, type: 2}
+  inactive: {fileID: 2100000, guid: 3d673e7291ec941a882b2a3133c15b6c, type: 2}

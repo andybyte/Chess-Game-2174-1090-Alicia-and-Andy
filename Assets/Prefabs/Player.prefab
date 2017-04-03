@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1131370221331762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -138,8 +138,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374275e0f340f4389bc64ee5953ece55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feedback: {fileID: 114757154290547770, guid: 0cdda019f3d174cf08a3c6d00e8be965, type: 2}
+  duration: 6
+  TurnCount: 0
+  PlayerNum: 0
   moveHistoryClass: {fileID: 0}
+  gameover: {fileID: 0}
+  bug: {fileID: 0}
 --- !u!114 &114729797003242898
 MonoBehaviour:
   m_ObjectHideFlags: 1

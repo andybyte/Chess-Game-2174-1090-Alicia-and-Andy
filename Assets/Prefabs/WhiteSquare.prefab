@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65812049800418860}
   - component: {fileID: 23198171257696502}
   - component: {fileID: 114450163435347910}
+  - component: {fileID: 114437786327610038}
   m_Layer: 8
   m_Name: WhiteSquare
   m_TagString: square
@@ -93,6 +94,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114437786327610038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1754204532131750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 25
+    i1: 160
+    i2: 120
+    i3: 34
+    i4: 124
+    i5: 38
+    i6: 172
+    i7: 164
+    i8: 251
+    i9: 186
+    i10: 117
+    i11: 253
+    i12: 19
+    i13: 112
+    i14: 61
+    i15: 73
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114450163435347910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,3 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squareID: 
+  occupant: {fileID: 0}
+  active: {fileID: 2100000, guid: da5c680f2758a4b4e81a597bcb3f8ada, type: 2}
+  inactive: {fileID: 2100000, guid: 14b0477b762ef324b88a0de6cf476a45, type: 2}

@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de2f516aebaa4920b480c9b1246e500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 6
   OnCollision:
     m_PersistentCalls:
       m_Calls:
@@ -254,12 +253,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  AmITarget: 0
+  Attacking: 0
+  hitObject: {fileID: 0}
   squareID: 
+  SquareOccupancy: {fileID: 1754204532131750, guid: 19a078227c26aca4fbba75fd13703d49,
+    type: 2}
   abbr: K
   colorStr: Blue
   bluemat: {fileID: 2100000, guid: 16f3dca3128b20a41b7e547c739b3660, type: 2}
   redmat: {fileID: 2100000, guid: 181463c9132e9b6499f7fdd147504634, type: 2}
+  activeBlueMat: {fileID: 2100000, guid: b6e5f4b2425cf47929df3bfa9c0b1b3c, type: 2}
+  activeRedMat: {fileID: 2100000, guid: aa2a1b1b63dd24a7da688ad7692dea7a, type: 2}
+  chosen: 0
 --- !u!114 &114197502108196284
 MonoBehaviour:
   m_ObjectHideFlags: 1

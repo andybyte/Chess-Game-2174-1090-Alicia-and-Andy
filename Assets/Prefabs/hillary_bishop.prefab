@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410584737766568}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.59999996, y: 0, z: 0.56}
+  m_LocalPosition: {x: 0.6, y: 0, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4328127564401904}
@@ -112,7 +112,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410584737766568}
-  m_Mesh: {fileID: 4300000, guid: 6ce9543d3587247c28dbe5af61cca6e0, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 987d1e6c60db9453096dc6e37379c74c, type: 3}
 --- !u!54 &54240383899269506
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -191,18 +191,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de2f516aebaa4920b480c9b1246e500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 6
   OnCollision:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  AmITarget: 0
+  Attacking: 0
+  hitObject: {fileID: 0}
   squareID: 
+  SquareOccupancy: {fileID: 0}
   abbr: B
   colorStr: Blue
   bluemat: {fileID: 2100000, guid: 16f3dca3128b20a41b7e547c739b3660, type: 2}
   redmat: {fileID: 2100000, guid: 181463c9132e9b6499f7fdd147504634, type: 2}
+  activeBlueMat: {fileID: 2100000, guid: b6e5f4b2425cf47929df3bfa9c0b1b3c, type: 2}
+  activeRedMat: {fileID: 2100000, guid: aa2a1b1b63dd24a7da688ad7692dea7a, type: 2}
+  chosen: 0
 --- !u!136 &136392578433883354
 CapsuleCollider:
   m_ObjectHideFlags: 1

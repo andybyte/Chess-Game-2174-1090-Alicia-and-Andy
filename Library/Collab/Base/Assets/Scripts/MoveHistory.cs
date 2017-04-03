@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class MoveHistory : MonoBehaviour {
-	public int turn;
-	public Camera trumpCamera;
+public class MoveHistory : NetworkBehaviour {
+	public static int turn;
 	public Camera hillaryCamera;
-	private List<string> moveHistory;
+	public static List<string> moveHistory;
 	public Button undoButton;
 	private Transform originalCamPos;
 	public Text moveHistoryText;
-
+	public Text history;
 
 	// Use this for initialization
 	void Start () {
+		moveHistory = new List<string> ();
 		turn = 1;
+
+		history = moveHistoryText.GetComponent<Text> ();
 
 		Button undo = undoButton.GetComponent<Button> ();
 		undo.onClick.AddListener (UndoOnClick);
@@ -24,30 +27,33 @@ public class MoveHistory : MonoBehaviour {
 	
 		hillaryCamera.enabled = true;
 
+		if (!isServer) {//camera for client (trump)
+			hillaryCamera.transform.position = new Vector3 (12, 10, 9);
+			Camera.main.transform.rotation = Quaternion.Euler(45,270,0);
 
+		} 
+
+		if(isServer) {//camera for server (hillary)
+			hillaryCamera.transform.position = new Vector3(-10,10,9);
+			Camera.main.transform.rotation  = Quaternion.Euler(45,90,0);
+		}
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if ((turn % 2) == 0) {
-			hillaryCamera.transform.position = new Vector3 (12, 10, 9);
-			Camera.main.transform.rotation = Quaternion.Euler(45,270,0);
-
-		} else {
-			hillaryCamera.transform.position = new Vector3(-10,10,9);
-			Camera.main.transform.rotation  = Quaternion.Euler(45,90,0);
-		}
 
 		if (Input.GetKeyDown ("space")) {//switch to space
-			StartCoroutine(TurnRotation());
-			//Debug.Log ("Switched");
+			//StartCoroutine(TurnRotation());
+			//coroutine isn't needed unless switching camera views again
+
 		}
 			
 	}
+		
 
 	IEnumerator TurnRotation(){
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(4);
 		turn += 1;
 	}
 
@@ -55,6 +61,12 @@ public class MoveHistory : MonoBehaviour {
 		Debug.Log ("UNDO");
 		if (turn > 0) {
 			turn -= 1;
+			moveHistory.RemoveAt(turn-1);
+			history.text = "";
+
+			for (int i = 0; i < moveHistory.Count; i++) {
+				history.text += moveHistory [turn-1] + "\n";
+			}
 		}
 		//needs put piece back based on last move
 		//needs to remove/cross out last move made in moveHistory
@@ -65,8 +77,43 @@ public class MoveHistory : MonoBehaviour {
 			return moveHistory;
 		}
 		set{
-			string move = "No. " + turn + " " + "Red/Blue: " + value;
-			moveHistory.Add(move);
+
 		}
 	}
+
+	[ClientRpc]
+	public void RpcAddToList(string moveInfo){//adds the move info to the moveHistory list for text access
+		string move = "No. " + turn + " " + moveInfo;
+		moveHistory.Add(move);
+	}
+		
+
+	[Command]
+	public void CmdIncrementTurn(){
+		turn += 1;
+		Debug.Log ("Turn No. " + turn);
+		//RpcIncrementTurn ();
+	}
+
+	[ClientRpc]
+	public void RpcIncrementTurn(){
+		turn += 1;
+	}
+
+	[Server]
+	public void IncrementTurn(){
+		turn += 1;
+	}
+
+	[Command]
+	public void CmdUpdateHistory(){
+		history.text += moveHistory [turn-1] + "\n";
+		RpcUpdateHistory ();
+	}
+
+	[ClientRpc]
+	public void RpcUpdateHistory(){
+		history.text += moveHistory [turn-1] + "\n";
+	}
+		
 }

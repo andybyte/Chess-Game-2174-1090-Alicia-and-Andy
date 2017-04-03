@@ -2,67 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class MoveHistory : MonoBehaviour {
-	public int turn;
-	public Camera trumpCamera;
+public class MoveHistory : NetworkBehaviour {
 	public Camera hillaryCamera;
-	public List<string> moveHistory;
-	public Button undoButton;
+	public static List<string> moveHistory;
 	private Transform originalCamPos;
 	public Text moveHistoryText;
 	public Text history;
+	public Text moveHistoryTextBox;
+	public Text PlayerFeed;
 
+	[SyncVar]
+	public string playerFeedText;
+	[SyncVar]
+	public int TurnCount;
+	[SyncVar]
+	public string SharedHistory;
 
 	// Use this for initialization
 	void Start () {
+		moveHistoryTextBox = GameObject.Find ("MHText").GetComponent<Text> ();
 		moveHistory = new List<string> ();
-		turn = 1;
+
+		PlayerFeed = GameObject.Find ("PlayerFeed").GetComponent<Text> ();
 
 		history = moveHistoryText.GetComponent<Text> ();
 
-		Button undo = undoButton.GetComponent<Button> ();
-		undo.onClick.AddListener (UndoOnClick);
-
 		hillaryCamera = GameObject.Find ("HillaryCamera").GetComponent<Camera> ();
-	
 		hillaryCamera.enabled = true;
 
-
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if ((turn % 2) == 0) {
+		if (!isServer) {//camera for client (trump)
 			hillaryCamera.transform.position = new Vector3 (12, 10, 9);
 			Camera.main.transform.rotation = Quaternion.Euler(45,270,0);
 
-		} else {
+		} 
+
+		if(isServer) {//camera for server (hillary)
 			hillaryCamera.transform.position = new Vector3(-10,10,9);
 			Camera.main.transform.rotation  = Quaternion.Euler(45,90,0);
 		}
-
-		if (Input.GetKeyDown ("space")) {//switch to space
-			StartCoroutine(TurnRotation());
-			history.text += moveHistory [turn-1] + "\n";
-		}
-			
-	}
 		
-
-	IEnumerator TurnRotation(){
-		yield return new WaitForSeconds(4);
-		turn += 1;
 	}
 
-	void UndoOnClick(){
-		Debug.Log ("UNDO");
-		if (turn > 0) {
-			turn -= 1;
+	// Update is called once per frame
+	void Update () {
+		moveHistoryTextBox.text = SharedHistory;
+
+		// Control player's turn.
+		if (TurnCount % 2 == 0) {
+			playerFeedText = "Go Player 1!";
+		} else {
+			playerFeedText = "Go Player 2!";
 		}
-		//needs put piece back based on last move
-		//needs to remove/cross out last move made in moveHistory
+
+		PlayerFeed.text = playerFeedText;
+			
 	}
 
 	public List<string> MoveHistoryList{
@@ -72,10 +67,5 @@ public class MoveHistory : MonoBehaviour {
 		set{
 
 		}
-	}
-
-	public void AddToList(string moveInfo){
-		string move = "No. " + turn + " " + moveInfo;
-		moveHistory.Add(move);
 	}
 }
